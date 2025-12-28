@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { TipoProveedor } from './tipo-proveedor.enum';
+import { Product } from '../../products/entities/product.entity';
 
 @Entity('providers')
 export class Provider {
@@ -42,6 +44,9 @@ export class Provider {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @OneToMany(() => Product, (product) => product.proveedor)
+  products: Product[];
 
   @CreateDateColumn()
   createdAt: Date;

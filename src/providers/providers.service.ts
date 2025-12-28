@@ -44,6 +44,7 @@ export class ProvidersService {
     }
 
     return await this.providersRepository.find({
+      relations: ['products'],
       order: { createdAt: 'DESC' },
     });
   }
@@ -51,6 +52,7 @@ export class ProvidersService {
   async findActive(user?: any): Promise<Provider[]> {
     return await this.providersRepository.find({
       where: { isActive: true },
+      relations: ['products'],
       order: { razonSocial: 'ASC' },
     });
   }
@@ -62,6 +64,7 @@ export class ProvidersService {
 
     const provider = await this.providersRepository.findOne({
       where: { id },
+      relations: ['products'],
     });
 
     if (!provider) {
